@@ -1,7 +1,3 @@
-# Update October 2021
-
-***Check out [this work](https://developer.nvidia.com/blog/accelerating-se3-transformers-training-using-an-nvidia-open-source-model-implementation/) by Alexandre Milesi et al. from Nvidia. They managed to speed up training of the SE(3)-Transformer by up to 21(!) times and reduced memory consumption by up to 43 times. Code [here](https://github.com/NVIDIA/DeepLearningExamples/tree/master/DGLPyTorch/DrugDiscovery/SE3Transformer).***
-
 # SE(3)-Transformers
 
 This repository is the official implementation of [SE(3)-Transformers: 3D Roto-Translation Equivariant Attention Networks](https://arxiv.org/abs/2006.10503). 
@@ -27,13 +23,6 @@ Please cite us as
 - [Pytorch](https://pytorch.org/)
 - [DGL](https://www.dgl.ai/)
   - pip install dgl-cu110
-  - <del> dgl 0.4.3 heads-up : this part is a bit tricky to make work correctly; for us `pip install dgl-cu90==0.4.3.post2` worked; if you use a different version, you might need to do some debugging (I believe expected datatypes for some interfaces changed)
-	- to check which CUDA version pytorch is using: `python -c "import torch; print(torch.version.cuda)"`
-	- check [here](https://docs.dgl.ai/install/index.html) for compatibility of DGL with CUDA etc.
-    - e.g. for CUDA 9.0: `pip install dgl-cu90==0.4.3.post2`
-    - e.g. for CUDA 10.1: `pip install dgl-cu101==0.4.3.post2`
-    - e.g. for CUDA 10.2: `pip install dgl-cu102==0.4.3.post2`</del>
-  - <del> if you get the error “libcublas.so.10: cannot open shared object file: No such file or directory”, running this command might help: `pip install torch-cluster==latest+cu101 -f https://pytorch-geometric.com/whl/torch-1.4.0.html`  </del>
   - please help us making this part more robust: tell us what you did to make it work on your specific system and we'll put it here
 - `pip install packaging`
 - optional: [Weights & Biases](https://www.wandb.com/)
@@ -114,15 +103,6 @@ output = fc_layer(features)
 
 ## FAQ
 
-**Type issues with QM9 experiments**
-
-One user reported that they experienced issues with data types when running the QM9 experiments. For them, adding the following lines just before line 184 of qm9.py fixed the issue:
-```
-x=x.astype(np.float32)
-one_hot=one_hot.astype(np.float32)
-atomic_numbers=atomic_numbers.astype(np.float32)
-```
-
 
 **Speed**
 
@@ -143,12 +123,6 @@ atomic_numbers=atomic_numbers.astype(np.float32)
 
 ## Credit to '3D Steerable CNNs'
 The code in the subfolder `equivariant_attention/from_se3cnn` is strongly based on `https://github.com/mariogeiger/se3cnn` which accompanies the paper '3D Steerable CNNs: Learning Rotationally Equivariant Features in Volumetric Data' by Weiler et al.
-
-
-## Feedback & Questions
-
-Please contact us at:
-fabian @ robots . ox . ac . uk
 
 
 ## License
